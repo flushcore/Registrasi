@@ -1,0 +1,45 @@
+﻿@model RegisterMVC.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<body class="hold-transition login-page">
+    @using (Html.BeginForm())
+    {
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="../../index2.html">Registration Online</a>
+            </div>
+            <!-- /.login-logo -->
+            <div class="login-box-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+                <h3 class="text-center" style="color:green">@ViewBag.Message</h3>
+                @Html.ValidationSummary(true)
+                <form>
+                    <div class="form-group">
+                        @Html.TextBox("Email", null, new { @class = "form-control center-block", @placeholder = "Email" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBox("Password", null, new { @class = "form-control center-block", @placeholder = "Password" })
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-8">
+                            <button type="submit" class="btn btn-primary" style="width:100%;">Login</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+                <div class="social-auth-links text-center">
+                    <p>- OR -</p>
+                    <a href="@Url.Action("New","Register")" class="btn btn-info" style="width:100%;">
+                        <i class="fa fa-plus"></i> New Account
+                    </a>
+                </div>
+            </div>
+            <!-- /.login-box-body -->
+        </div>
+        <!-- /.login-box -->
+    }
+</body>

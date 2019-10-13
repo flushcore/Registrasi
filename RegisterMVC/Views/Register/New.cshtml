@@ -1,0 +1,107 @@
+﻿@model RegisterMVC.Models.RegisterModel
+@{
+    ViewBag.Title = "New";
+}
+
+<body class="hold-transition login-page">
+    @using (Html.BeginForm("New", "Register", FormMethod.Post))
+    {
+        @Html.HiddenFor(Model => Model.UserId)
+        @Html.Hidden("Birth", "null", new { @id = "hdfBirth" })
+        <div class="login-box">
+            <div class="login-logo">
+                <h3>Registration</h3>
+            </div>
+            <form>
+                <div class="login-box-body">
+                    @*Mobile Phone*@
+                    <div class="form-group">
+                        @Html.TextBox("MobilePhone", null, new { @id = "txtMobilephone", @class = "form-control center-block", @type = "text", @placeholder = "Mobile number (+62...)" })
+                        @Html.ValidationMessageFor(model => model.MobilePhone)
+                        <p id="status" />
+                    </div>
+                    @*First Name*@
+                    <div class="form-group">
+                        @Html.TextBox("FirstName", null, new { @class = "form-control center-block", @type = "text", @placeholder = "First name" })
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </div>
+                    @*Last Name*@
+                    <div class="form-group">
+                        @Html.TextBox("LastName", null, new { @class = "form-control center-block", @type = "text", @placeholder = "Last name" })
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                    @*Birth*@
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <select id="ddlDay" class="form-control Birth" placeholder="Day">
+                                @{
+                                    for (int i = 1; i <= 31; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select id="ddlMonth" class="form-control Birth" placeholder="Month">
+                                <option value="1">Jan</option>
+                                <option value="2">Feb</option>
+                                <option value="3">Mar</option>
+                                <option value="4">Apr</option>
+                                <option value="5">May</option>
+                                <option value="6">Jun</option>
+                                <option value="7">Jul</option>
+                                <option value="8">Aug</option>
+                                <option value="9">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Des</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select id="ddlYear" class="form-control Birth" placeholder="Year" style="padding-right:10px">
+                                @{
+                                    for (int i = DateTime.Now.Year; i >= 1900; i--)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    @*Gender*@
+                    <div class="form-group">
+                        @Html.RadioButton("Gender", 1, new { @id = "gender1", @type = "radio" })
+                        <label> Male</label>
+                        @Html.RadioButton("Gender", 2, new { @id = "gender2", @type = "radio" })
+                        <label> Female</label>
+                    </div>
+                    @*Email*@
+                    <div class="form-group">
+                        @Html.TextBox("Email", null, new { @class = "form-control center-block", @type = "email", @placeholder = "Email" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                    @*Button Submit*@
+                    <div class="row">
+                        <input type="submit" value="Register" class="btn btn-success center-block" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+</body>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+
+    <script>
+        $(".Birth").change(function () {
+            debugger;
+            var Day = $("#ddlDay").val();
+            var Month = $("#ddlMonth").val();
+            var Year = $("#ddlYear").val();
+
+            $("#hdfBirth").val(Day + "/" + Month + "/" + Year);
+        });
+    </script>
+}
